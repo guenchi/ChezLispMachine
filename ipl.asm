@@ -68,6 +68,9 @@ next:
         cmp     ch, CYLS
         jb      readloop
 
+        move    [0x0ff0], ch
+        jmp     0xc200
+
 
 print:
 
@@ -87,15 +90,6 @@ end:
 
 error:
         mov     si, errormsg
-
-msg:
-
-        db      0x0a, 0x0a, 0x0a
-        db      "Chez Lisp Machine"
-        db      0x0a, 0x0a, 0x0a
-        db      "- guenchi"
-        db      0 
-
 
 errormsg:
 
