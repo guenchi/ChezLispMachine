@@ -28,8 +28,23 @@ entry:
         mov     ss, ax
         mov     sp, 0x7c00
         mov     ds, ax
+
+        mov     ax, 0x0820
         mov     es, ax
-        mov     si, msg
+        mov     ch, 0
+        mov     dh, 0
+        mov     cl, 2
+
+        mov     ah, 0x02
+        mov     al, 1
+        mov     bx, 0
+        mov     dl, 0x00
+        int     0x13
+        jc      error
+
+error:
+        hlt
+        jmp end
 
 
 print:
