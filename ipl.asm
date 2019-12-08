@@ -1,3 +1,5 @@
+CYLS    equ     10
+
         org     0x7c00
 
         jmp     entry
@@ -57,6 +59,14 @@ next:
         add     cl, 1
         cmp     cl, 18
         jbe     readloop
+        mov     cl, 1
+        add     dh, 1
+        cmp     dh, 2
+        jb      readloop
+        mov     dh, 0
+        add     ch, 1
+        cmp     ch, CYLS
+        jb      readloop
 
 
 print:
@@ -66,14 +76,14 @@ print:
         cmp     al, 0
         je      end
         mov     AH, 0x0e
-        mov     BX, 15
+        mov     bx, 15
         int     0x10
         jmp     print
 
 end:
 
         hlt
-        jmp end
+        jmp     end
 
 error:
         mov     si, errormsg
