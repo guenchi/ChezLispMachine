@@ -52,9 +52,6 @@ retry:
         int     0x13
         jmp     retry
 
-error:
-        hlt
-        jmp end
 
 print:
 
@@ -72,6 +69,9 @@ end:
         hlt
         jmp end
 
+error:
+        mov     si, errormsg
+
 msg:
 
         db      0x0a, 0x0a, 0x0a
@@ -79,6 +79,14 @@ msg:
         db      0x0a, 0x0a, 0x0a
         db      "- guenchi"
         db      0 
+
+
+errormsg:
+
+        db      0x0a, 0x0a, 0x0a
+        db      "load error"
+        db      0 
+
 
         times 510 - ($ - $$) db 0
         db 0x55, 0xaa
