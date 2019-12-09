@@ -68,7 +68,7 @@ next:
         cmp     ch, CYLS
         jb      readloop
 
-        move    [0x0ff0], ch
+        mov    [0x0ff0], ch
         jmp     0xc200
 
 
